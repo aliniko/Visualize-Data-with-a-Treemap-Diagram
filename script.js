@@ -13,6 +13,35 @@ let canvas = d3.select('#canvas')
 
 let drawTreeMap = () => {
 
+    
+// #3: My tree map should have rect elements with a corresponding class="tile" that represent the data
+// Creating a Hierarchy:
+// - We first have to create a 'hierarchy' with our data to tell d3 how to order things and how to determine the areas of items
+// - We do this by calling the d3.hierarchy() method. We give this two arguments. 
+// Firstly, the data object movieData which we imported earlier, 
+// secondly a function to point it to where the child nodes are → 
+// here they are in an array called 'children' so we return that
+// - We then call the sum() method on this hierarchy, where we give it a function that takes in one of the items/nodes of the tree, 
+// in this case, a movie and tell it from where we should determine the area. We want this to be based on the value, since a larger value should create a larger block. 
+// So point this to return the 'value' field.
+// - We then call the sort() method on this hierarchy to specify how we should order the data.
+//  This is given a function that takes in any two nodes. We subtract and return the value of node 1 from node 2.
+//  If this is positive, node 2 has a higher value and should be ahead, otherwise node 1 should be ahead
+
+let hierarchy = d3.hierarchy(movieData, 
+    (node) => {
+        return node['children']
+    }
+).sum(
+    (node) => {
+        return node['value']
+    }
+).sort(
+    (node1, node2) => {
+        return node2['value'] - node1['value']
+    } 
+)
+
 }
 
 
