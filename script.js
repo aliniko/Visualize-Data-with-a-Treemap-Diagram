@@ -42,6 +42,31 @@ let hierarchy = d3.hierarchy(movieData,
     } 
 )
 
+let createTreeMap = d3.treemap()
+                        .size([1000, 600])
+
+createTreeMap(hierarchy)                  
+
+let movieTiles = hierarchy.leaves()
+console.log(movieTiles)
+
+// Creating the Tiles:
+// - We are using'g' here instead of direct rectangles since we want to add text to the tles
+// - Select all the g on the canvas and assign this to the variable blocks
+// - Associate them with the movieTiles array
+// - Call enter() to determine what to do for each movie where there isn't a g element
+// - Create a new g element with the append() method and type of 'g'
+// - Append each block with a 'rect' element to create a rectangle in each block
+// - Set the class of the rectangle to 'tile'
+
+let block = canvas.selectAll('g')
+            .data(movieTiles)
+            .enter()
+            .append('g')
+
+block.append('rect')
+        .attr('class', 'tile')
+
 }
 
 
