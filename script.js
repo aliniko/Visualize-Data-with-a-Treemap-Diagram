@@ -66,7 +66,28 @@ let block = canvas.selectAll('g')
 
 block.append('rect')
         .attr('class', 'tile')
-
+        // #4: There should be at least 2 different fill colors used for the tiles
+        // Add a 'fill' attribute to the rectangle selection like this:      
+        // - Select the 'category' field from the 'data' object from the movie item
+        // - Return different color values based on the category
+        .attr('fill', (movie) => {
+            let category = movie['data']['category']
+            if(category === 'Action'){
+                return 'orange'
+            }else if(category === 'Drama'){
+                return 'lightgreen'
+            }else if(category === 'Adventure'){
+                return 'crimson'
+            }else if(category === 'Family'){
+                return 'steelblue'
+            }else if(category === 'Animation'){
+                return 'pink'
+            }else if(category === 'Comedy'){
+                return 'khaki'
+            }else if(category === 'Biography'){
+                return 'tan'
+            }
+        })
 }
 
 
