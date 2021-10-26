@@ -87,6 +87,12 @@ block.append('rect')
             }else if(category === 'Biography'){
                 return 'tan'
             }
+        }).attr('data-name', (movie) => {
+            return movie['data']['name']
+        }).attr('data-catagory', (movie) => {
+            return movie['data']['category']
+        }).attr('data-value', (movie) =>{
+            return movie['data']['value']
         })
 }
 
