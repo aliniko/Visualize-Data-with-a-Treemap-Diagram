@@ -63,6 +63,15 @@ let block = canvas.selectAll('g')
             .data(movieTiles)
             .enter()
             .append('g')
+//  #6: The area of each tile should correspond to the data-value amount: 
+// tiles with a larger data-value should have a bigger area
+// Set the coordinates of the blocks:
+// - Apply a translate transformation to the 'g' blocks
+// - Give it a function to take in an item from the movieTiles array (a movie)
+// - Translate it along the x axis by x0 and y axis by y0, so that the top left corner of the block is at x0, y0
+            .attr('transform', (movie) => {
+                return 'translate(' + movie['x0'] + ',' + movie['y0'] + ')'
+            })
 
 block.append('rect')
         .attr('class', 'tile')
@@ -87,13 +96,31 @@ block.append('rect')
             }else if(category === 'Biography'){
                 return 'tan'
             }
+    // tile with name, category and value
         }).attr('data-name', (movie) => {
             return movie['data']['name']
-        }).attr('data-catagory', (movie) => {
+        }).attr('data-category', (movie) => {
             return movie['data']['category']
         }).attr('data-value', (movie) =>{
             return movie['data']['value']
         })
+        // adding rectangle in the graph
+        .attr('width', (movie) =>{
+            return movie['x1'] - movie['x0']
+        })
+        .attr('height', (movie) => {
+            return movie['y1'] - movie['y0']
+        })
+        // the text represent each movie
+        
+    block.append('text')
+            .text((movie) => {
+                return movie['data']['name']
+            })
+            .attr('x', 5)
+            .attr('y', 20)
+
+
 }
 
 
