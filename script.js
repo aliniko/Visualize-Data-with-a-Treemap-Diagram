@@ -10,6 +10,7 @@ let movieDataUrl = 'https://cdn.freecodecamp.org/testable-projects-fcc/data/tree
 let movieData
 
 let canvas = d3.select('#canvas')
+let tooltip = d3.select('#tooltip')
 
 let drawTreeMap = () => {
 
